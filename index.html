@@ -1,25 +1,104 @@
 <!DOCTYPE html >
-<html>
- <head>
-  <title> This is my first webpage!</title>
-  <link href="https://fonts.googleapis.com/css2?family=Albert+Sans&display=swap" rel="stylesheet">
- </head>
- <body>
-   <br>
-   <h1 style = "color:#03fcdb; font-size: 67px; font-family: 'Courier New'; text-align: center;"> Hello! </h1>
-   <p style = "color:#000000; font-size: 15px; font-family: 'Albert Sans'; text-align: center;"> Welcome to my innovative webpage experiment! 
-   </p>
+<div class="scroll-wrapper">
+  <div class="content">
+    <img src="https://i.ibb.co/bMvc7Zr6/Vibrant-Summer-Meadow-Watercolor.png" alt="Meadow">
+    <div class="text-block">SCROLL FOR LIQUID GLASS</div>
+    <img src="https://i.ibb.co/ZRH04pV3/Vibrant-Summer-Meadow-Watercolor-1.png" alt="Flowers">
+  </div>
 
-   <p style = "color:#000000; font-size: 15px; font-family: 'Albert Sans'; text-align: center;"> This html webpage will be the host of all of my ideas, and inspiration. 
-   </p>
-   <br>
-   <a href = "https://www.youtube.com/@3blue1brown" style = "font-family: 'Courier New'; display: block; text-align: center; font-weight: bold;" > A inspiring and very useful/insightful channel on Computers and digital technology! </a>
-   <br>
-   <img src="https://cdn.britannica.com/41/129641-050-D30CA107/lightbulb-invention-Thomas-Alva-Edison-1879.jpg" width = "550" height = "450" style = "display:block; margin: 0 auto;">
- 
-   <br>
-   <button style = "display:block; margin: 0 auto; font-family: 'Albert Sans'; color:#32a852;" type="button">Clickable Button!</button>
+  <div class="button-anchor">
+    <button class="apple-lens">
+      <!-- The new accurate plus sign -->
+      <div class="plus-icon"></div>
+    </button>
+  </div>
+</div>
 
-<! -- The new additions from the previous exit card is that the image now has specified dimensions making it smaller, and a new clickable button that doesn't do anything in the meantime. -->
- </body>
- </html>
+<svg style="visibility: hidden; position: absolute;" width="0" height="0">
+  <filter id="liquid-warp" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+    <feTurbulence type="fractalNoise" baseFrequency="0.015" numOctaves="3" result="noise" />
+    <feDisplacementMap in="SourceGraphic" in2="noise" scale="55" xChannelSelector="R" yChannelSelector="G" />
+  </filter>
+</svg>
+
+<style>
+  body, html { margin: 0; padding: 0; background: #fff; }
+
+  .scroll-wrapper { height: 100vh; overflow-y: scroll; }
+  .content { display: flex; flex-direction: column; align-items: center; padding: 100px 0; gap: 150px; }
+  .content img { width: 80%; border-radius: 40px; }
+  .text-block { font-size: 2rem; font-weight: 200; color: #ddd; font-family: sans-serif; }
+
+  .button-anchor {
+    position: fixed;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10;
+  }
+
+  .apple-lens {
+    width: 220px;
+    height: 220px;
+    border-radius: 50%;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    background: rgba(255, 255, 255, 0.02);
+    cursor: pointer;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    /* The core glass logic */
+    backdrop-filter: blur(25px) url(#liquid-warp) saturate(1.8);
+    -webkit-backdrop-filter: blur(25px) url(#liquid-warp) saturate(1.8);
+    
+    box-shadow: 
+      0 25px 50px rgba(0,0,0,0.1),
+      inset 0 0 20px rgba(255,255,255,0.25);
+  }
+
+  /* The top-left reflection from the images */
+  .apple-lens::after {
+    content: "";
+    position: absolute;
+    top: 12%; left: 12%;
+    width: 55%; height: 55%;
+    background: radial-gradient(circle, rgba(255,255,255,0.35) 0%, rgba(255,255,255,0) 75%);
+    border-radius: 50%;
+  }
+
+  /* ACCURATE PLUS SIGN */
+  .plus-icon {
+    position: relative;
+    width: 100px; /* Precise span of the plus */
+    height: 100px;
+    z-index: 20;
+    filter: drop-shadow(0 1px 3px rgba(0,0,0,0.1));
+  }
+
+  /* Horizontal and Vertical bars */
+  .plus-icon::before,
+  .plus-icon::after {
+    content: "";
+    position: absolute;
+    background: white;
+    border-radius: 10px; /* Creates those rounded caps from the image */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  /* Vertical Bar */
+  .plus-icon::before {
+    width: 7px;   /* Stroke thickness */
+    height: 100%; /* Vertical length */
+  }
+
+  /* Horizontal Bar */
+  .plus-icon::after {
+    width: 100%;  /* Horizontal length */
+    height: 7px;  /* Stroke thickness */
+  }
+
+  .apple-lens:active { transform: scale(0.96); transition: 0.1s; }
+</style>
