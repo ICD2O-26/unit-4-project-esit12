@@ -1,104 +1,217 @@
-<!DOCTYPE html >
-<div class="scroll-wrapper">
-  <div class="content">
-    <img src="https://i.ibb.co/bMvc7Zr6/Vibrant-Summer-Meadow-Watercolor.png" alt="Meadow">
-    <div class="text-block">SCROLL FOR LIQUID GLASS</div>
-    <img src="https://i.ibb.co/ZRH04pV3/Vibrant-Summer-Meadow-Watercolor-1.png" alt="Flowers">
-  </div>
-
-  <div class="button-anchor">
-    <button class="apple-lens">
-      <!-- The new accurate plus sign -->
-      <div class="plus-icon"></div>
-    </button>
-  </div>
-</div>
-
-<svg style="visibility: hidden; position: absolute;" width="0" height="0">
-  <filter id="liquid-warp" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-    <feTurbulence type="fractalNoise" baseFrequency="0.015" numOctaves="3" result="noise" />
-    <feDisplacementMap in="SourceGraphic" in2="noise" scale="55" xChannelSelector="R" yChannelSelector="G" />
-  </filter>
-</svg>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Ray Tracing Technology</title>
 
 <style>
-  body, html { margin: 0; padding: 0; background: #fff; }
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+    color: #222;
+    margin: 0;
+}
 
-  .scroll-wrapper { height: 100vh; overflow-y: scroll; }
-  .content { display: flex; flex-direction: column; align-items: center; padding: 100px 0; gap: 150px; }
-  .content img { width: 80%; border-radius: 40px; }
-  .text-block { font-size: 2rem; font-weight: 200; color: #ddd; font-family: sans-serif; }
+header {
+    background: #ffffff;
+    padding: 20px;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+}
 
-  .button-anchor {
-    position: fixed;
-    top: 50%; left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 10;
-  }
+section {
+    max-width: 800px;
+    margin: 30px auto;
+    padding: 20px;
+    background: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
 
-  .apple-lens {
-    width: 220px;
-    height: 220px;
-    border-radius: 50%;
-    border: 1px solid rgba(255, 255, 255, 0.5);
-    background: rgba(255, 255, 255, 0.02);
-    cursor: pointer;
+h2 {
+    margin-top: 0;
+}
+
+p {
+    line-height: 1.6;
+}
+
+img {
+    width: 100%;
+    max-width: 700px;
+    display: block;
+    margin: 20px auto;
+    border-radius: 10px;
+}
+
+/* Slider */
+.slider-container {
     position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    
-    /* The core glass logic */
-    backdrop-filter: blur(25px) url(#liquid-warp) saturate(1.8);
-    -webkit-backdrop-filter: blur(25px) url(#liquid-warp) saturate(1.8);
-    
-    box-shadow: 
-      0 25px 50px rgba(0,0,0,0.1),
-      inset 0 0 20px rgba(255,255,255,0.25);
-  }
+    max-width: 500px;
+    margin: 30px auto;
+    overflow: hidden;
+    border-radius: 12px;
+}
 
-  /* The top-left reflection from the images */
-  .apple-lens::after {
-    content: "";
+.slider-container img {
+    width: 100%;
+}
+
+.image-overlay {
     position: absolute;
-    top: 12%; left: 12%;
-    width: 55%; height: 55%;
-    background: radial-gradient(circle, rgba(255,255,255,0.35) 0%, rgba(255,255,255,0) 75%);
-    border-radius: 50%;
-  }
+    top: 0;
+    left: 0;
+    width: 50%;
+    height: 100%;
+    overflow: hidden;
+}
 
-  /* ACCURATE PLUS SIGN */
-  .plus-icon {
-    position: relative;
-    width: 100px; /* Precise span of the plus */
-    height: 100px;
-    z-index: 20;
-    filter: drop-shadow(0 1px 3px rgba(0,0,0,0.1));
-  }
-
-  /* Horizontal and Vertical bars */
-  .plus-icon::before,
-  .plus-icon::after {
-    content: "";
+.label {
     position: absolute;
-    background: white;
-    border-radius: 10px; /* Creates those rounded caps from the image */
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-  }
+    top: 10px;
+    padding: 5px 10px;
+    background: rgba(0,0,0,0.6);
+    color: white;
+    border-radius: 5px;
+    font-size: 14px;
+}
 
-  /* Vertical Bar */
-  .plus-icon::before {
-    width: 7px;   /* Stroke thickness */
-    height: 100%; /* Vertical length */
-  }
+.label.left { left: 10px; }
+.label.right { right: 10px; }
 
-  /* Horizontal Bar */
-  .plus-icon::after {
-    width: 100%;  /* Horizontal length */
-    height: 7px;  /* Stroke thickness */
-  }
+#slider {
+    width: 100%;
+    margin-top: 10px;
+}
 
-  .apple-lens:active { transform: scale(0.96); transition: 0.1s; }
+footer {
+    text-align: center;
+    padding: 15px;
+    color: #666;
+}
 </style>
+</head>
+
+<body>
+
+<header>
+<h1>Ray Tracing</h1>
+<p>A Modern Rendering Technology</p>
+</header>
+
+<section>
+<h2>What is this technology?</h2>
+<p>
+Ray tracing is a rendering technique used to simulate realistic lighting in digital images.
+It calculates how light interacts with objects to produce highly detailed and photo-realistic visuals.
+</p>
+</section>
+
+<section>
+<h2>What problem does this technology solve?</h2>
+<p>
+Ray tracing applies a faster, easier, and more efficient rendering method to simulate and reflect
+realistic lighting conditions.
+</p>
+</section>
+
+<section>
+<h2>How does it work?</h2>
+<p>
+Ray tracing works by sending rays in real time from the camera’s point of view to light sources.
+It captures reflections, shadows, colors, materials, and textures to generate realistic images.
+</p>
+
+<img src="https://d29g4g2dyqv443.cloudfront.net/sites/default/files/pictures/2018/RayTracing/ray-tracing-image-1.jpg">
+</section>
+
+<section>
+<h2>Ray Tracing Comparison</h2>
+<p>Drag to compare RTX OFF vs RTX ON (Ray Tracing enabled).</p>
+
+<div class="slider-container">
+
+    <img src="https://images.nvidia.com/aem-dam/Solutions/geforce/technologies/ray-tracing/rtx-off.jpg">
+
+    <div class="image-overlay" id="overlay">
+        <img src="https://images.nvidia.com/aem-dam/Solutions/geforce/technologies/ray-tracing/rtx-on.jpg">
+    </div>
+
+    <span class="label left">RTX OFF</span>
+    <span class="label right">RTX ON</span>
+
+</div>
+
+<input type="range" min="0" max="100" value="50" id="slider">
+
+<p>
+Ray tracing improves reflections, lighting, and shadows to create more realistic visuals.
+</p>
+</section>
+
+<section>
+<h2>Where is it used?</h2>
+<p>
+Ray tracing is used in video graphics, 3D modeling, animation, film/VFX, and video games.
+</p>
+</section>
+
+<section>
+<h2>History</h2>
+<p>
+The concept of ray tracing dates back to the 16th century when German artist Albrecht Dürer
+described projecting 3D scenes onto a 2D plane. In 1968, Arthur Appel developed early computer-based
+ray tracing methods for film rendering. In 2018, NVIDIA introduced real-time ray tracing with RTX GPUs.
+</p>
+</section>
+
+<section>
+<h2>Impacts</h2>
+
+<h3>Social</h3>
+<p>
+Ray tracing improves realism in media, making games, films, and simulations more immersive.
+</p>
+
+<h3>Cultural</h3>
+<p>
+It enhances digital art and storytelling by allowing more visually realistic environments.
+</p>
+
+<h3>Economic</h3>
+<p>
+It drives demand for powerful GPUs and boosts industries like gaming and film, but increases costs.
+</p>
+
+<h3>Environmental</h3>
+<p>
+High computing power requirements increase energy usage and environmental impact.
+</p>
+
+<h3>Ethical</h3>
+<p>
+Highly realistic visuals can blur the line between real and digital content.
+</p>
+
+<h3>Local & Global</h3>
+<p>
+It creates jobs locally in tech industries and influences global media production.
+</p>
+
+</section>
+
+<footer>
+<p>Educational Project</p>
+</footer>
+
+<script>
+const slider = document.getElementById("slider");
+const overlay = document.getElementById("overlay");
+
+slider.addEventListener("input", function() {
+    overlay.style.width = this.value + "%";
+});
+</script>
+
+</body>
+</html>
