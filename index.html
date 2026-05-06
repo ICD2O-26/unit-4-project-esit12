@@ -2,20 +2,20 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Ray Tracing Comparison Slider</title>
+<title>Ray Tracing Technology</title>
 
 <style>
 body {
     font-family: Arial, sans-serif;
     background-color: #f9f9f9;
-    margin: 0;
     color: #222;
+    margin: 0;
 }
 
 header {
-    text-align: center;
+    background: #ffffff;
     padding: 20px;
-    background: white;
+    text-align: center;
     border-bottom: 1px solid #ddd;
 }
 
@@ -23,12 +23,31 @@ section {
     max-width: 800px;
     margin: 30px auto;
     padding: 20px;
-    background: white;
+    background: #ffffff;
     border-radius: 10px;
     box-shadow: 0 2px 8px rgba(0,0,0,0.05);
 }
 
-/* ===== Slider ===== */
+h2 {
+    margin-top: 0;
+}
+
+p {
+    line-height: 1.6;
+}
+
+/* normal image */
+img {
+    width: 100%;
+    max-width: 700px;
+    display: block;
+    margin: 20px auto;
+    border-radius: 10px;
+}
+
+/* =======================
+   SLIDER STYLES
+======================= */
 
 .slider-container {
     position: relative;
@@ -44,12 +63,12 @@ section {
     display: block;
 }
 
-/* bottom image (RTX OFF) */
+/* base image (RTX OFF) */
 .base-img {
     position: relative;
 }
 
-/* top image (RTX ON) clipped */
+/* overlay (RTX ON) */
 .overlay {
     position: absolute;
     top: 0;
@@ -66,7 +85,7 @@ section {
     width: 100%;
 }
 
-/* divider line */
+/* divider */
 .divider {
     position: absolute;
     top: 0;
@@ -78,7 +97,7 @@ section {
     cursor: ew-resize;
 }
 
-/* handle circle */
+/* handle */
 .handle {
     position: absolute;
     top: 50%;
@@ -105,6 +124,11 @@ section {
 .label.left { left: 10px; }
 .label.right { right: 10px; }
 
+footer {
+    text-align: center;
+    padding: 15px;
+    color: #666;
+}
 </style>
 </head>
 
@@ -112,17 +136,45 @@ section {
 
 <header>
 <h1>Ray Tracing</h1>
-<p>Drag to compare RTX OFF vs RTX ON</p>
+<p>A Modern Rendering Technology</p>
 </header>
 
 <section>
+<h2>What is this technology?</h2>
+<p>
+Ray tracing is a rendering technique used to simulate realistic lighting in digital images.
+It calculates how light interacts with objects to produce highly detailed and photo-realistic visuals.
+</p>
+</section>
+
+<section>
+<h2>What problem does this technology solve?</h2>
+<p>
+Ray tracing improves rendering accuracy by simulating real-world light behavior such as reflection,
+refraction, shadows, and global illumination more realistically than traditional rasterization.
+</p>
+</section>
+
+<section>
+<h2>How does it work?</h2>
+<p>
+Ray tracing works by tracing rays from the camera into a scene and calculating how they interact
+with surfaces, materials, and light sources to generate realistic images.
+</p>
+
+<img src="https://d29g4g2dyqv443.cloudfront.net/sites/default/files/pictures/2018/RayTracing/ray-tracing-image-1.jpg">
+</section>
+
+<section>
+<h2>Ray Tracing Comparison</h2>
+<p>Drag to compare RTX OFF vs RTX ON (Ray Tracing enabled).</p>
 
 <div class="slider-container" id="slider">
 
-    <!-- RTX OFF (base) -->
+    <!-- RTX OFF -->
     <img class="base-img" src="ray-trace-off.png">
 
-    <!-- RTX ON (overlay) -->
+    <!-- RTX ON -->
     <div class="overlay" id="overlay">
         <img src="ray-trace-on.png">
     </div>
@@ -136,8 +188,48 @@ section {
     <span class="label right">RTX ON</span>
 
 </div>
-
 </section>
+
+<section>
+<h2>Where is it used?</h2>
+<p>
+Ray tracing is widely used in video games, animation, film production, 3D modeling, and simulation technologies.
+</p>
+</section>
+
+<section>
+<h2>History</h2>
+<p>
+The idea of ray tracing dates back centuries in optics and geometry, but modern computational ray tracing
+was developed in the 1960s and became widely practical in graphics with GPU acceleration technologies like NVIDIA RTX in 2018.
+</p>
+</section>
+
+<section>
+<h2>Impacts</h2>
+
+<h3>Social</h3>
+<p>Improves immersion in games and media.</p>
+
+<h3>Cultural</h3>
+<p>Enhances realism in digital storytelling and art.</p>
+
+<h3>Economic</h3>
+<p>Drives GPU demand and graphics industry growth.</p>
+
+<h3>Environmental</h3>
+<p>Increases energy consumption due to high computational demand.</p>
+
+<h3>Ethical</h3>
+<p>Highly realistic visuals can blur digital vs real content.</p>
+
+<h3>Global</h3>
+<p>Influences worldwide entertainment and simulation industries.</p>
+</section>
+
+<footer>
+<p>Created By: Elven Sit</p>
+</footer>
 
 <script>
 const slider = document.getElementById("slider");
@@ -150,31 +242,26 @@ function setPosition(x) {
     const rect = slider.getBoundingClientRect();
     let percent = (x - rect.left) / rect.width;
 
-    // clamp 0–1
     percent = Math.max(0, Math.min(1, percent));
 
     overlay.style.width = (percent * 100) + "%";
     divider.style.left = (percent * 100) + "%";
 }
 
-// start dragging
 divider.addEventListener("pointerdown", () => {
     isDragging = true;
 });
 
-// drag anywhere on image (like real demos)
 slider.addEventListener("pointerdown", (e) => {
     isDragging = true;
     setPosition(e.clientX);
 });
 
-// move
 window.addEventListener("pointermove", (e) => {
     if (!isDragging) return;
     setPosition(e.clientX);
 });
 
-// stop
 window.addEventListener("pointerup", () => {
     isDragging = false;
 });
