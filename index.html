@@ -2,20 +2,20 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Ray Tracing Technology</title>
+<title>Ray Tracing Comparison Slider</title>
 
 <style>
 body {
     font-family: Arial, sans-serif;
     background-color: #f9f9f9;
-    color: #222;
     margin: 0;
+    color: #222;
 }
 
 header {
-    background: #ffffff;
-    padding: 20px;
     text-align: center;
+    padding: 20px;
+    background: white;
     border-bottom: 1px solid #ddd;
 }
 
@@ -23,49 +23,75 @@ section {
     max-width: 800px;
     margin: 30px auto;
     padding: 20px;
-    background: #ffffff;
+    background: white;
     border-radius: 10px;
     box-shadow: 0 2px 8px rgba(0,0,0,0.05);
 }
 
-h2 {
-    margin-top: 0;
-}
+/* ===== Slider ===== */
 
-p {
-    line-height: 1.6;
-}
-
-img {
-    width: 100%;
-    max-width: 700px;
-    display: block;
-    margin: 20px auto;
-    border-radius: 10px;
-}
-
-/* Slider */
 .slider-container {
     position: relative;
-    max-width: 500px;
+    max-width: 600px;
     margin: 30px auto;
     overflow: hidden;
     border-radius: 12px;
+    user-select: none;
 }
 
 .slider-container img {
     width: 100%;
+    display: block;
 }
 
-.image-overlay {
+/* bottom image (RTX OFF) */
+.base-img {
+    position: relative;
+}
+
+/* top image (RTX ON) clipped */
+.overlay {
     position: absolute;
     top: 0;
     left: 0;
-    width: 50%;
     height: 100%;
+    width: 50%;
     overflow: hidden;
 }
 
+.overlay img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+}
+
+/* divider line */
+.divider {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    width: 3px;
+    background: white;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    cursor: ew-resize;
+}
+
+/* handle circle */
+.handle {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 18px;
+    height: 18px;
+    background: white;
+    border-radius: 50%;
+    border: 2px solid #333;
+}
+
+/* labels */
 .label {
     position: absolute;
     top: 10px;
@@ -79,16 +105,6 @@ img {
 .label.left { left: 10px; }
 .label.right { right: 10px; }
 
-#slider {
-    width: 100%;
-    margin-top: 10px;
-}
-
-footer {
-    text-align: center;
-    padding: 15px;
-    color: #666;
-}
 </style>
 </head>
 
@@ -96,45 +112,24 @@ footer {
 
 <header>
 <h1>Ray Tracing</h1>
-<p>A Modern Rendering Technology</p>
+<p>Drag to compare RTX OFF vs RTX ON</p>
 </header>
 
 <section>
-<h2>What is this technology?</h2>
-<p>
-Ray tracing is a rendering technique used to simulate realistic lighting in digital images.
-It calculates how light interacts with objects to produce highly detailed and photo-realistic visuals.
-</p>
-</section>
 
-<section>
-<h2>What problem does this technology solve?</h2>
-<p>
-Ray tracing applies a faster, easier, and more efficient rendering method to simulate and reflect
-realistic lighting conditions.
-</p>
-</section>
+<div class="slider-container" id="slider">
 
-<section>
-<h2>How does it work?</h2>
-<p>
-Ray tracing works by sending rays in real time from the camera’s point of view to light sources.
-It captures reflections, shadows, colors, materials, and textures to generate realistic images.
-</p>
+    <!-- RTX OFF (base) -->
+    <img class="base-img" src="ray-trace-off.png">
 
-<img src="https://d29g4g2dyqv443.cloudfront.net/sites/default/files/pictures/2018/RayTracing/ray-tracing-image-1.jpg">
-</section>
-
-<section>
-<h2>Ray Tracing Comparison</h2>
-<p>Drag to compare RTX OFF vs RTX ON (Ray Tracing enabled).</p>
-
-<div class="slider-container">
-
-    <img src="ray-trace-off.png">
-
-    <div class="image-overlay" id="overlay">
+    <!-- RTX ON (overlay) -->
+    <div class="overlay" id="overlay">
         <img src="ray-trace-on.png">
+    </div>
+
+    <!-- divider -->
+    <div class="divider" id="divider">
+        <div class="handle"></div>
     </div>
 
     <span class="label left">RTX OFF</span>
@@ -142,74 +137,46 @@ It captures reflections, shadows, colors, materials, and textures to generate re
 
 </div>
 
-<input type="range" min="0" max="100" value="50" id="slider">
-
-<p>
-Ray tracing improves reflections, lighting, and shadows to create more realistic visuals.
-</p>
 </section>
-
-<section>
-<h2>Where is it used?</h2>
-<p>
-Ray tracing is used in video graphics, 3D modeling, animation, film/VFX, and video games.
-</p>
-</section>
-
-<section>
-<h2>History</h2>
-<p>
-The concept of ray tracing dates back to the 16th century when German artist Albrecht Dürer
-described projecting 3D scenes onto a 2D plane. In 1968, Arthur Appel developed early computer-based
-ray tracing methods for film rendering. In 2018, NVIDIA introduced real-time ray tracing with RTX GPUs.
-</p>
-</section>
-
-<section>
-<h2>Impacts</h2>
-
-<h3>Social</h3>
-<p>
-Ray tracing improves realism in media, making games, films, and simulations more immersive.
-</p>
-
-<h3>Cultural</h3>
-<p>
-It enhances digital art and storytelling by allowing more visually realistic environments.
-</p>
-
-<h3>Economic</h3>
-<p>
-It drives demand for powerful GPUs and boosts industries like gaming and film, but increases costs.
-</p>
-
-<h3>Environmental</h3>
-<p>
-High computing power requirements increase energy usage and environmental impact.
-</p>
-
-<h3>Ethical</h3>
-<p>
-Highly realistic visuals can blur the line between real and digital content.
-</p>
-
-<h3>Local & Global</h3>
-<p>
-It creates jobs locally in tech industries and influences global media production.
-</p>
-
-</section>
-
-<footer>
-<p>Created By: Elven Sit</p>
-</footer>
 
 <script>
 const slider = document.getElementById("slider");
 const overlay = document.getElementById("overlay");
+const divider = document.getElementById("divider");
 
-slider.addEventListener("input", function() {
-    overlay.style.width = this.value + "%";
+let isDragging = false;
+
+function setPosition(x) {
+    const rect = slider.getBoundingClientRect();
+    let percent = (x - rect.left) / rect.width;
+
+    // clamp 0–1
+    percent = Math.max(0, Math.min(1, percent));
+
+    overlay.style.width = (percent * 100) + "%";
+    divider.style.left = (percent * 100) + "%";
+}
+
+// start dragging
+divider.addEventListener("pointerdown", () => {
+    isDragging = true;
+});
+
+// drag anywhere on image (like real demos)
+slider.addEventListener("pointerdown", (e) => {
+    isDragging = true;
+    setPosition(e.clientX);
+});
+
+// move
+window.addEventListener("pointermove", (e) => {
+    if (!isDragging) return;
+    setPosition(e.clientX);
+});
+
+// stop
+window.addEventListener("pointerup", () => {
+    isDragging = false;
 });
 </script>
 
